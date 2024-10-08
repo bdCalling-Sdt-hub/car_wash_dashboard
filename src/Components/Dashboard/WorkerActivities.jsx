@@ -4,7 +4,7 @@ import { useFetchWorkersQuery } from "../../Redux/Apis/workerApis"
 import WorkerActivitiesTable from "../Work/WorkerActivitiesTable"
 
 const WorkerActivities = () => {
-    const { data: workers } = useFetchWorkersQuery('activity')
+    const { data: workers } = useFetchWorkersQuery({ status: 'activity' })
     return <div className="h-full bg-[var(--color-white)] p-1 rounded-md">
         <div className="between-center">
             <h2 className="heading">work activities</h2>

@@ -88,7 +88,7 @@ body {
   }
 
   .button-white {
-    @apply px-8 py-3 rounded-md flex justify-center items-center w-fit gap-2 bg-[var(--color-white)] text-[var(--bg-black)]  hover:scale-105 transition-all active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:active:scale-100 card-shadow
+    @apply px-8 py-3 rounded-md flex justify-center items-center w-fit gap-2 bg-[var(--color-white)] text-[var(--bg-black)] hover:scale-105 transition-all active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:active:scale-100 card-shadow
   }
 
   .button-red {
@@ -173,7 +173,7 @@ body {
   display: none;
 }
 
-.ant-modal-content{
+.ant-modal-content {
   padding: 0 !important;
 }
 
@@ -202,6 +202,7 @@ body {
   animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
   inset: 6px;
 }
+
 
 @keyframes rotate {
   0% {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-const Map = ({ locationData, height }) => {
+const Map = ({ locationData, height, center }) => {
     // useEffect(() => {
     //     if (navigator.geolocation) {
     //         navigator.geolocation.getCurrentPosition(
@@ -17,10 +17,12 @@ const Map = ({ locationData, height }) => {
     //         );
     //     }
     // }, []);
+
     return (
         <div style={{ height: `${height}px` || "300px", width: '100%' }}>
             <MapContainer
-                center={[23.7619, 90.4331]}
+                // center={[locationData?.[0]?.longitude , locationData?.[0]?.longitude]}
+                center={center}
                 zoom={13}
                 style={{ height: '100%', width: '100%' }}
             >

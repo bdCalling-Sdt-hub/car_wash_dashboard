@@ -4,13 +4,17 @@ const notificationsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         // get notifications
         getNotifications: builder.query({
-            query: ({ page, limit }) => ({ url: `notification/get-notifications?page=${page || 1}&limit=${limit || 50}`, method: 'GET' }),
+            query: ({ page = 1, limit }) => ({
+                url: `/dashboard/get-admin-notification`,
+                method: 'GET',
+                params: { limit, page }
+            }),
             providesTags: ['notification']
         }),
         // read notifications
         readSingleNotification: builder.mutation({
             query: ({ data }) => {
-                return { url: `notification/update-notification`, body: data, method: 'PATCH', }
+                return { url: `/dashboard/mark-as-read`, body: data, method: 'PATCH', }
             },
             invalidatesTags: ['notification']
         }),

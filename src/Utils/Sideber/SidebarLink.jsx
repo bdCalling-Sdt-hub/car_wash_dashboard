@@ -1,5 +1,5 @@
 import { BsCardText } from "react-icons/bs";
-import { FaArrowsRotate, FaCodePullRequest, FaUserDoctor, FaUserTie } from "react-icons/fa6";
+import { FaArrowsRotate, FaCheck, FaCodePullRequest, FaUserDoctor, FaUserTie } from "react-icons/fa6";
 import { HiArrowTrendingUp } from "react-icons/hi2";
 import { IoCheckmarkDone } from "react-icons/io5";
 import { LuCalendarClock, LuUser2 } from "react-icons/lu";
@@ -25,6 +25,11 @@ export const SidebarLink = [
         path: '/total-client',
         label: 'Total Client',
         icon: <LuUser2 size={24} />,
+    },
+    {
+        path: '/ended-work',
+        label: 'Ended Work',
+        icon: <FaCheck size={24} />,
     },
     {
         path: '/complete-work',

@@ -7,41 +7,41 @@ const PendingWashTable = ({ data, pagination }) => {
 
         {
             title: 'Name',
-            dataIndex: 'Name',
-            key: 'Name',
-            render: (_, record) => <UserImageName name={record?.Name} image={record?.Image} />
+            dataIndex: 'clientName',
+            key: 'clientName',
+            // render: (_, record) => <UserImageName name={record?.clientName} image={record?.Image} />
         },
 
         {
             title: 'Location',
-            dataIndex: 'Location',
-            key: 'Location',
+            dataIndex: 'address',
+            key: 'address',
 
         },
         {
             title: 'Contact Info',
-            dataIndex: 'ContactInfo',
-            key: 'ContactInfo',
+            dataIndex: 'clientPhoneNumber',
+            key: 'clientPhoneNumber',
 
         },
         {
             title: 'Number Of Spa',
-            dataIndex: 'NumberOfSpa',
-            key: 'NumberOfSpa',
+            dataIndex: 'currentServiceNumber',
+            key: 'currentServiceNumber',
 
         },
-        {
-            title: 'Time',
-            dataIndex: 'Time',
-            key: 'Time',
-        },
+        // {
+        //     title: 'Time',
+        //     dataIndex: 'Time',
+        //     key: 'Time',
+        // },
         {
             title: 'Action',
             dataIndex: 'Action',
             key: 'Action',
             render: (_, record) => <div className="start-center gap-2">
-                <Link to={`/track?id=${record?.id || 1}`} className='button-orange'>Track</Link>
-                <button className='button-green'>done</button>
+                <Link to={`/track?id=${record?._id || 1}`} className='button-orange'>Track</Link>
+                {/* <button className='button-green'>done</button> */}
             </div>
         },
     ]

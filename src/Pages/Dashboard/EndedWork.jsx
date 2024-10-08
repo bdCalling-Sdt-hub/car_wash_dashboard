@@ -1,17 +1,16 @@
 import { useState } from "react"
-import PendingWashTable from "../../Components/PendingWash/PendingWashTable"
 import PageHeading from "../../Components/Shared/PageHeading"
+import WorkerActivitiesTable from "../../Components/Work/WorkerActivitiesTable"
 import { useFetchWorkersQuery } from "../../Redux/Apis/workerApis"
-
-const PendingWash = () => {
+const EndedWork = () => {
     const [page, setPage] = useState()
     const { data: workers } = useFetchWorkersQuery({ status: 'ENDED', page })
     return (
         <>
-            <div className="mb-3">
-                <PageHeading text="Pending Wash" />
+            <div className="mb-2">
+                <PageHeading text="Complete Work" />
             </div>
-            <PendingWashTable data={workers?.data?.result} pagination={{
+            <WorkerActivitiesTable data={workers?.data?.result} pagination={{
                 total: workers?.data?.total,
                 pageSize: workers?.data?.limit,
                 showSizeChanger: false,
@@ -20,4 +19,6 @@ const PendingWash = () => {
         </>
     )
 }
-export default PendingWash
+
+
+export default EndedWork

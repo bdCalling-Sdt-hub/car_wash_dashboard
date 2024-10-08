@@ -3,14 +3,19 @@ import Button from '../../Components/Shared/Button'
 import { MdDelete } from 'react-icons/md'
 import { useSocketContext } from '../../Context/SocketContext'
 import Loading from '../../Components/Shared/Loading'
-import { useReadAllNotificationsMutation, useReadSingleNotificationMutation } from '../../Redux/Apis/notificationsApis'
+import { useGetNotificationsQuery, useReadAllNotificationsMutation, useReadSingleNotificationMutation } from '../../Redux/Apis/notificationsApis'
+import { useState } from 'react'
 
 
 const Notification = () => {
+    const [limit, setLimit] = useState(50)
     const { isLoadingNotifications, notifications, totalNotifications, setNotificationLimit, notificationLimit } = useSocketContext();
     //rtk query
     const [readSingleNotification] = useReadSingleNotificationMutation()
     const [readAllNotifications] = useReadAllNotificationsMutation()
+    const { data: allNotification } = useGetNotificationsQuery({ limit })
+    console.log(allNotification)
+    // const
     return (
         <div className='bg-[var(--bg-white-20)] p-4 rounded-md'>
             {
@@ -23,7 +28,7 @@ const Notification = () => {
             </div>
             <div className='start-start gap-2 flex-col'>
                 {
-                    notifications?.map((item, i) => (
+                    allNotification?.data?.data?.map((item, i) => (
                         <div onClick={() => {
                             const data = { notificationIds: [item?._id] }
                             readSingleNotification({ data })
@@ -31,7 +36,7 @@ const Notification = () => {
                             <div className='between-center col-span-7 w-full gap-4'>
                                 <div>
                                     <p className='font-medium'>{item?.title?.slice(0, 100)}</p>
-                                    <p className='text-sm'>{item?.body?.slice(0, 100)}</p>
+                                    <p className='text-sm'>{item?.message?.slice(0, 100)}</p>
                                 </div>
                                 <div>
                                     <p className='text-xs'>{item?.createdAt?.split('T')?.[1]?.split('.')[0]}</p>
@@ -46,7 +51,7 @@ const Notification = () => {
                 }
             </div>
 
-            <Button style={{ padding: '10px' }} text={"Load More"} classNames="button-blue w-full mt-5 " handler={() => setNotificationLimit(notificationLimit + 30)}></Button>
+            <Button style={{ padding: '10px' }} text={"Load More"} classNames="button-blue w-full mt-5 " handler={() => setLimit(limit + 30)}></Button>
 
         </div>
     );

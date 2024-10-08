@@ -4,9 +4,10 @@ const workerApis = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         // Fetch all subscriptions
         fetchWorkers: builder.query({
-            query: (status) => ({
-                url: `/dashboard/works${status ? `?status=${status}` : ''}`,
+            query: ({ status, page }) => ({
+                url: `/dashboard/works`,
                 method: "GET",
+                params: { status, page },
             }),
             providesTags: ['overview'],
         }),
@@ -78,7 +79,24 @@ const workerApis = baseApi.injectEndpoints({
                 method: 'DELETE',
             }),
             invalidatesTags: ['Workers']
-        })
+        }),
+        // complete work
+        compleatWork: builder.mutation({
+            query: (data) => ({
+                url: `/job/admin-complete-work`,
+                method: 'PATCH',
+                body: data
+            }),
+            invalidatesTags: ['overview']
+        }),
+        // Fetch all works
+        fetchSingleJob: builder.query({
+            query: (id) => ({
+                url: `/job/track-single-started-job?jobId=${id}`,
+                method: "GET",
+            }),
+            providesTags: ['Works'],
+        }),
     }),
 });
 
@@ -91,6 +109,8 @@ export const {
     useFetchSortedNearbyWorkersQuery,
     useFetchWorksQuery,
     useFetchSingleWorkerQuery,
-    useDeleteWorkerMutation
+    useDeleteWorkerMutation,
+    useCompleatWorkMutation,
+    useFetchSingleJobQuery
 } = workerApis;
 

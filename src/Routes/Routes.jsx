@@ -17,6 +17,7 @@ import PendingWash from "../Pages/Dashboard/PendingWash";
 import Subscriptions from "../Pages/Dashboard/Subscriptions";
 import Track from "../Pages/Dashboard/Track";
 import TotalRequest from "../Pages/Dashboard/TotalRequest";
+import EndedWork from "../Pages/Dashboard/EndedWork";
 
 export const Routes = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ export const Routes = createBrowserRouter([
             {
                 path: '/total-request',
                 element: <TotalRequest />
+            },
+            {
+                path: '/ended-work',
+                element: <EndedWork />
             },
             {
                 path: '/total-client',
