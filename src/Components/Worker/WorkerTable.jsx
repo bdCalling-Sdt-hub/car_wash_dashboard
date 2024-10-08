@@ -8,6 +8,7 @@ import { FaInfoCircle } from 'react-icons/fa'
 import { useAssignWorkMutation, useDeleteWorkerMutation } from '../../Redux/Apis/workerApis'
 import toast from 'react-hot-toast'
 import Loading from '../Shared/Loading'
+import { useDeleteClientMutation } from '../../Redux/Apis/clientApis'
 
 const WorkerTable = ({ data, pagination, modal, jobId, closeModal }) => {
     const [openModal, setOpenModal] = useState(false)
@@ -41,7 +42,6 @@ const WorkerTable = ({ data, pagination, modal, jobId, closeModal }) => {
             toast.error(err?.data?.message)
         })
     }
-    console.log(selectedClient)
     const columns = [
         {
             title: 'Name',

@@ -10,7 +10,7 @@ const ClientDetails = ({ selectedClient }) => {//⭐
             <p>Contact Number : {selectedClient?.phone_number}</p>
             <p>Location : {selectedClient?.address}</p>
             {
-                selectedClient?.role !== 'WORKER' && <p>Package User : Premium</p>
+                selectedClient?.role !== 'WORKER' && <p>Package User : {selectedClient?.currentSubscription ? selectedClient?.currentSubscription : 'N/A'} </p>
             }
             {
                 selectedClient?.role === 'WORKER' && <>

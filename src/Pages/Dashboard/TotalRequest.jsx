@@ -1,4 +1,5 @@
 
+import { useState } from "react"
 import DriverTable from "../../Components/Driver/DriverTable"
 import PageHeading from "../../Components/Shared/PageHeading"
 import Search from "../../Components/Shared/Search"
@@ -71,21 +72,29 @@ const data = [
 ]
 
 const TotalRequest = () => {
-    const { data: ClientRequest } = useFetchClientsRequestQuery()
-    console.log(ClientRequest)
+    const [page, setPage] = useState()
+    const [searchTerm, setSearchTerm] = useState('')
+    const { data: ClientRequest } = useFetchClientsRequestQuery({ searchTerm, page })
     return (
         <>
             <div className="between-center gap-2 mb-2">
                 <PageHeading text=" Total Request" />
-                <Search placeholder="Search Worker" handler={(value) => console.log(value)} />
+                <Search placeholder="Search Worker" handler={(value) => setSearchTerm(value)} />
             </div>
-            <DriverTable data={ClientRequest?.data?.result?.slice(0, 5) || []} pagination={false} />
-            {/* <DriverTable data={data} type='request' pagination={{
-                total: 10,
-                pageSize: 5,
+            <DriverTable data={ClientRequest?.data?.result?.slice(0, 5) || []} pagination={{
+                total: ClientRequest?.data?.total,
+                pageSize: ClientRequest?.data?.limit,
                 showSizeChanger: false,
+                current: page,
+                onChange: (page) => setPage(page)
+            }} />
+            {/* <DriverTable data={data} type='request' pagination={{
+                total: ClientRequest?.data?.total,
+                pageSize: ClientRequest?.data?.limit,
+                showSizeChanger: false,
+                current:page,
                 onChange: (page) => {
-                    console.log(page)
+                  setPage(page)
                 }
             }} /> */}
         </>

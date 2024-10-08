@@ -4,18 +4,18 @@ const clientApis = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         // Fetch all clients with optional search term
         fetchClients: builder.query({
-            query: (searchTerm = '') => ({
+            query: ({ searchTerm = '', page = 1 }) => ({
                 url: `/dashboard/get-all-client`,
                 method: "GET",
-                params: { searchTerm },
+                params: { searchTerm, page },
             }),
             providesTags: ['Clients'],
         }),
         fetchClientsRequest: builder.query({
-            query: (searchTerm = '') => ({
+            query: ({ searchTerm = '', page = 1 }) => ({
                 url: `/dashboard/all-client-request`,
                 method: "GET",
-                params: { searchTerm },
+                params: { searchTerm, page },
             }),
             providesTags: ['Clients'],
         }),
@@ -29,11 +29,20 @@ const clientApis = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['Clients'],
         }),
+        // Block or unblock a client
+        deleteClient: builder.mutation({
+            query: (id) => ({
+                url: `/dashboard/delete-client?id=${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ['Clients'],
+        }),
     }),
 });
 
 export const {
     useFetchClientsQuery,
     useBlockUnblockClientMutation,
-    useFetchClientsRequestQuery
+    useFetchClientsRequestQuery,
+    useDeleteClientMutation
 } = clientApis;

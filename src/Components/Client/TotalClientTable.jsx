@@ -7,12 +7,15 @@ import ClientDetails from './ClientDetails'
 import { FaInfoCircle } from 'react-icons/fa'
 import { useAssignWorkMutation } from '../../Redux/Apis/workerApis'
 import toast from 'react-hot-toast'
+import { useDeleteClientMutation } from '../../Redux/Apis/clientApis'
+import moment from 'moment'
 
 const TotalClientTable = ({ data, pagination, modal, jobId, closeModal }) => {
     const [openModal, setOpenModal] = useState(false)
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
     const [selectedClient, setSelectedClient] = useState({})
     const [assign, { isLoading }] = useAssignWorkMutation()
+    const [deleteClient, { isLoading: isDeleting }] = useDeleteClientMutation()
     const handleAssignWork = (id) => {
         const FormatData = {
             workerId: id,
@@ -24,6 +27,17 @@ const TotalClientTable = ({ data, pagination, modal, jobId, closeModal }) => {
             toast.dismiss()
             toast.success(res?.message)
         }).catch((err) => {
+            toast.dismiss()
+            toast.error(err?.data?.message)
+        })
+    }
+    const handleDelete = () => {
+        deleteClient(selectedClient?._id).unwrap().then(res => {
+            setOpenDeleteModal(false)
+            toast.dismiss()
+            toast.success(res.message)
+        }).catch(err => {
+            setOpenDeleteModal(false)
             toast.dismiss()
             toast.error(err?.data?.message)
         })
@@ -40,17 +54,19 @@ const TotalClientTable = ({ data, pagination, modal, jobId, closeModal }) => {
             dataIndex: 'address',
             key: 'address',
         },
-        {
-            title: 'Distance',
-            dataIndex: 'distance',
-            key: 'distance',
-            render: (_, record) => <p>{(Number(record?.distance) / 1000)?.toFixed(2)}KM</p>,
-        },
+        modal ?
+            {
+                title: 'Distance',
+                dataIndex: 'distance',
+                key: 'distance',
+                render: (_, record) => <p>{(Number(record?.distance) / 1000)?.toFixed(2)}KM</p>,
+            } : {},
         !modal ?
             {
-                title: 'Date',
-                dataIndex: 'Date',
-                key: 'Date',
+                title: 'Date OF Birth',
+                dataIndex: 'date_of_birth',
+                key: 'date_of_birth',
+                render: (_, record) => <p>{record?.date_of_birth ? moment(record?.date_of_birth).format("MMM Do YY") : 'N/A'}</p>
             } : {},
         {
             title: 'Contact Info',
@@ -58,9 +74,9 @@ const TotalClientTable = ({ data, pagination, modal, jobId, closeModal }) => {
             key: 'phone_number',
         },
         {
-            title: 'Completed Service',
-            dataIndex: 'totalCompletedService',
-            key: 'totalCompletedService',
+            title: 'Current Service Number',
+            dataIndex: 'currentServiceNumber',
+            key: 'currentServiceNumber',
         },
         {
             title: 'Action',
@@ -105,7 +121,7 @@ const TotalClientTable = ({ data, pagination, modal, jobId, closeModal }) => {
                 <FaInfoCircle className='text-red-600 text-4xl' />
                 <p className='text-3xl text-center'>Are you sure you want to delete this user?</p>
                 <div className='center-center col-span-2 gap-2'>
-                    <button onClick={() => setOpenDeleteModal(false)}
+                    <button disabled={isDeleting} onClick={() => setOpenDeleteModal(false)}
                         style={{
                             padding: '10px 20px'
                         }}
@@ -114,7 +130,7 @@ const TotalClientTable = ({ data, pagination, modal, jobId, closeModal }) => {
                     >
                         Cancel
                     </button>
-                    <button
+                    <button disabled={isDeleting} onClick={() => handleDelete()}
                         style={{
                             padding: '10px 20px'
                         }}
