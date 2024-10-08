@@ -12,7 +12,7 @@ const Notification = () => {
     const { isLoadingNotifications, notifications, totalNotifications, setNotificationLimit, notificationLimit } = useSocketContext();
     //rtk query
     const [readSingleNotification] = useReadSingleNotificationMutation()
-    const [readAllNotifications] = useReadAllNotificationsMutation()
+    // const [readAllNotifications] = useReadAllNotificationsMutation()
     const { data: allNotification } = useGetNotificationsQuery({ limit })
     console.log(allNotification)
     // const
@@ -23,16 +23,19 @@ const Notification = () => {
             }
             <PageHeading text="Notifications" />
             <div className='between-center mt-5 mb-5'>
-                <p className='heading '>Total {totalNotifications} Notifications</p>
-                <Button style={{ padding: '10px 20px' }} text={"read all"} classNames="button-blue w-full mt-5 " handler={() => readAllNotifications()} ></Button>
+                {/* <p className='heading '>Total {totalNotifications} Notifications</p> */}
+                <p></p>
+                <div className='text-end'>
+                    <Button style={{ padding: '10px 20px' }} text={"read all"} classNames="button-blue w-full mt-5 hover:text-blue-400" handler={() => readSingleNotification()} ></Button>
+                </div>
             </div>
             <div className='start-start gap-2 flex-col'>
                 {
                     allNotification?.data?.data?.map((item, i) => (
                         <div onClick={() => {
-                            const data = { notificationIds: [item?._id] }
-                            readSingleNotification({ data })
-                        }} className={`grid-cols-7 w-full grid gap-4 card-shadow rounded-md p-2 cursor-pointer ${item?.isRead ? 'bg-[var(--bg-white)]' : 'bg-[var(--bg-gray-20)]'}`} key={i}>
+                            // const data = { notificationIds: [item?._id] }
+                            // readSingleNotification({ data })
+                        }} className={`grid-cols-7 w-full grid gap-4 card-shadow rounded-md p-2 ${item?.isRead ? 'bg-[var(--bg-white)]' : 'bg-[var(--bg-gray-20)]'}`} key={i}>
                             <div className='between-center col-span-7 w-full gap-4'>
                                 <div>
                                     <p className='font-medium'>{item?.title?.slice(0, 100)}</p>

@@ -112,7 +112,7 @@ const SubscriptionForm = ({ color, data, setOpenModal }) => {
                             </div>
                         ))}
                         <Form.Item className="end-center col-span-2">
-                            <button className="bg-white p-2 rounded-md" type="button" onClick={() => add()} >
+                            <button disabled={fields.length > 7} className="bg-white p-2 rounded-md disabled:bg-gray-400" type="button" onClick={() => add()} >
                                 <FaPlus />
                             </button>
                         </Form.Item>
@@ -124,7 +124,7 @@ const SubscriptionForm = ({ color, data, setOpenModal }) => {
                     Save
                 </button>
             </div>
-        </Form>
+        </Form >
     )
 }
 

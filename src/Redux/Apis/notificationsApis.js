@@ -13,8 +13,8 @@ const notificationsApi = baseApi.injectEndpoints({
         }),
         // read notifications
         readSingleNotification: builder.mutation({
-            query: ({ data }) => {
-                return { url: `/dashboard/mark-as-read`, body: data, method: 'PATCH', }
+            query: () => {
+                return { url: `/dashboard/mark-as-read`, body: {}, method: 'PATCH', }
             },
             invalidatesTags: ['notification']
         }),

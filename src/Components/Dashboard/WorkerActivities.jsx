@@ -8,7 +8,7 @@ const WorkerActivities = () => {
     return <div className="h-full bg-[var(--color-white)] p-1 rounded-md">
         <div className="between-center">
             <h2 className="heading">work activities</h2>
-            <Link to={``}>view all</Link>
+            <Link to={`/pending-wash`}>view all</Link>
         </div>
         <WorkerActivitiesTable data={workers?.data?.result?.slice(0, 4)} pagination={false} />
     </div>

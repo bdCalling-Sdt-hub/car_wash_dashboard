@@ -12,6 +12,7 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
     const [openModal, setOpenModal] = useState(false)
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
     const [id, setId] = useState()
+    const [selectedData, setSelectedData] = useState({})
     const [completeWork, { isLoading }] = useCompleatWorkMutation()
     const handleCompleatWork = () => {
 
@@ -29,6 +30,7 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
             toast.error(err?.data?.message)
         })
     }
+    console.log(selectedData)
     const columns = [
         {
             title: 'Name',
@@ -57,7 +59,7 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
             title: 'Action',
             dataIndex: 'Action',
             key: 'Action',
-            render: (_, record) => <button disabled={record?.status !== 'ENDED'} onClick={() => { setId(record?._id); setOpenDeleteModal(true) }} style={{ padding: '5px 10px', borderRadius: '3px', width: '100%', maxWidth: '100px', }} className={`w-[100px] bg-[var(--color-orange)] text-white`}>{record?.status}</button>
+            render: (_, record) => <button disabled={record?.status !== 'ENDED'} onClick={() => { setId(record?._id); setSelectedData(record); setOpenDeleteModal(true) }} style={{ padding: '5px 10px', borderRadius: '3px', width: '100%', maxWidth: '100px', }} className={`w-[100px] bg-[var(--color-orange)] text-white`}>{record?.status}</button>
         },
     ]//{record?.Action === 'Complete' ? 'button-orange' : 'button-black'}
     return (
@@ -81,11 +83,21 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
                 footer={false}
                 open={openDeleteModal}
                 onCancel={() => setOpenDeleteModal(false)}
-                width={400}
+                width={700}
             >
                 <div className='center-center gap-3 flex-col p-6'>
                     <FaInfoCircle className='text-red-600 text-4xl' />
-                    <p className='text-3xl text-center'>Are you sure you want to Compleat this work</p>
+                    <p className='text-xl text-center'>Are you sure you want to Compleat this work</p>
+                    <div className="grid-2 w-full h-[350px] overflow-hidden">
+                        <div className="h-[350px] ">
+                            <p className="font-bold">Before image</p>
+                            <img className="object-contain w-full h-full border" src={selectedData?.carImageBefore} alt="" />
+                        </div>
+                        <div className="h-[350px] ">
+                            <p className="font-bold">After image</p>
+                            <img className="object-contain w-full h-full border" src={selectedData?.carImageAfter} alt="" />
+                        </div>
+                    </div>
                     <div className='center-center col-span-2 gap-2'>
                         <button disabled={isLoading} onClick={() => setOpenDeleteModal(false)}
                             style={{
