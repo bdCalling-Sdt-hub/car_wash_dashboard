@@ -18,11 +18,12 @@ import Subscriptions from "../Pages/Dashboard/Subscriptions";
 import Track from "../Pages/Dashboard/Track";
 import TotalRequest from "../Pages/Dashboard/TotalRequest";
 import EndedWork from "../Pages/Dashboard/EndedWork";
+import AdminRoutes from "../PrivetRoutes/AdminRoutes";
 
 export const Routes = createBrowserRouter([
     {
         path: '/',
-        element: <Dashboard />,
+        element: <AdminRoutes> <Dashboard /></AdminRoutes>,
         children: [
             {
                 path: '/',
