@@ -11,8 +11,6 @@ export const baseApi = createApi({
     tagTypes: ["auth", 'category', 'doctor', 'banner'],
 })
 export const imageUrl = (image) => {
-    console.log(image);
-
     if (typeof image !== 'string') {
         return '';
     }

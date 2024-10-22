@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
     const { data, isLoading: LoadingData, isError, error, isFetching } = useGetPrivacyQuery()
     // handler 
     const AddPrivacyHandler = () => {
-        const data = { value: content }
+        const data = { description: content }
         addPrivacy(data).unwrap().then((res) => toast.success(res?.message || 'Privacy policy added successfully')).catch((err) => toast.error(err?.data?.message || 'something went wrong'))
     }
     useEffect(() => {
