@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useGetProfileQuery } from '../../Redux/Apis/authApi'
 import { url } from '../../Utils/BaseUrl'
 import { useSocketContext } from '../../Context/SocketContext'
+import { imageUrl } from '../../Redux/BaseUrl'
 const Header = () => {
     //states
     const navigate = useNavigate()
@@ -19,7 +20,7 @@ const Header = () => {
                 <IoIosNotifications size={40} />
             </Badge>
             <div onClick={() => navigate('/profile')} className='center-center gap-2 px-3 w-fit py-1 border border-[var(--bg-white)] rounded-md cursor-pointer'>
-                <img className='w-10 h-10 rounded-full object-cover' src={data?.data?.profile_image ? data?.data?.profile_image : profile} alt="" />
+                <img className='w-10 h-10 rounded-full object-cover' src={imageUrl(data?.data?.profile_image) ? imageUrl(data?.data?.profile_image) : profile} alt="" />
                 <p className='text-base text-[var(--color-white)]'>{data?.data?.name}</p>
             </div>
         </div>

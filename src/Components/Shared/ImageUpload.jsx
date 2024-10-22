@@ -2,6 +2,7 @@ import { Input } from 'antd'
 import React, { useState } from 'react'
 import { FaImage } from 'react-icons/fa6'
 import { url } from '../../Utils/BaseUrl';
+import { imageUrl } from '../../Redux/BaseUrl';
 
 const ImageUpload = ({ accept, setFiles, Files, multiple, image }) => {
     const [isDragging, setIsDragging] = useState(false);
@@ -42,7 +43,7 @@ const ImageUpload = ({ accept, setFiles, Files, multiple, image }) => {
                         Files.length <= 0 && !image && <p>Drop image file here to upload (or click)</p>
                     }
                     {
-                        Files.length > 0 ? <img src={URL.createObjectURL(Files[0])} className=' h-full w-full object-contain' alt="" /> : image ? <img className=' h-full w-full object-contain' src={`${url}/${image}`} /> : <FaImage size={50} />
+                        Files.length > 0 ? <img src={URL.createObjectURL(Files[0])} className=' h-full w-full object-contain' alt="" /> : imageUrl(image) ? <img className=' h-full w-full object-contain' src={imageUrl(image)} /> : <FaImage size={50} />
                     }
                 </div>
             }

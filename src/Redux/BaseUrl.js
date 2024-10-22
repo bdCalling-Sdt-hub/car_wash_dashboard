@@ -8,5 +8,20 @@ export const baseApi = createApi({
         },
     }),
     endpoints: () => ({}),
-    tagTypes: ["auth", 'category','doctor','banner'],
+    tagTypes: ["auth", 'category', 'doctor', 'banner'],
 })
+export const imageUrl = (image) => {
+    console.log(image);
+
+    if (typeof image !== 'string') {
+        return '';
+    }
+
+    if (image.includes('http')) {
+        return image;
+    }
+    if (image.startsWith('/')) {
+        return `http://192.168.10.32:8052${image}`;
+    }
+    return `http://192.168.10.32:8052/${image}`;
+}

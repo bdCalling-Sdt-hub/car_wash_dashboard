@@ -1,9 +1,7 @@
 import { BsCardText } from "react-icons/bs";
 import { FaArrowsRotate, FaCheck, FaCodePullRequest, FaUserDoctor, FaUserTie } from "react-icons/fa6";
-import { HiArrowTrendingUp } from "react-icons/hi2";
 import { IoCheckmarkDone } from "react-icons/io5";
 import { LuCalendarClock, LuUser2 } from "react-icons/lu";
-import { MdDashboard } from "react-icons/md";
 
 export const SidebarLink = [
     {
@@ -58,12 +56,12 @@ export const SettingLinks = [
     //     path: '/faq',
     //     label: 'FAQ',
     // },
-    // {
-    //     path: '/privacy-policy',
-    //     label: 'Privacy Policy',
-    // },
-    // {
-    //     path: '/terms-&-condition',
-    //     label: 'Terms & Condition',
-    // },
+    {
+        path: '/privacy-policy',
+        label: 'Privacy Policy',
+    },
+    {
+        path: '/terms-&-condition',
+        label: 'Terms & Condition',
+    },
 ]

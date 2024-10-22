@@ -3,7 +3,7 @@ import { AssignWorkFields } from '../../Utils/FormFields/AssignWorkFields'
 import TextArea from 'antd/es/input/TextArea'
 
 import L, { icon } from 'leaflet';
-
+import mark from '../../assets/icons/mark.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import Map from '../Shared/Map';
@@ -18,6 +18,14 @@ import { useFetchNerByWorkerQuery } from '../../Redux/Apis/workerApis';
 const customIcon = new L.Icon({
     iconUrl: markerIcon,
     iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl: markerShadow,
+    shadowSize: [41, 41]
+});
+const clientIcon = new L.Icon({
+    iconUrl: mark,
+    iconSize: [40, 40],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
     shadowUrl: markerShadow,
@@ -39,7 +47,7 @@ const AssignForm = ({ closeModal, selectedId }) => {
     }]);
     const map = useMemo(() => {
         return <div className='w-full h-full'>
-            {showMap ? <Map height={300} key={location.pathname} center={[locationData?.[0]?.longitude, locationData?.[0]?.longitude]} locationData={locationData} /> : <div className='h-[300px] w-full relative'>
+            {showMap ? <Map height={300} key={location.pathname} center={[locationData?.[0]?.longitude, locationData?.[0]?.latitude]} locationData={locationData} /> : <div className='h-[300px] w-full relative'>
                 <Loading />
             </div>}
         </div>
@@ -52,15 +60,25 @@ const AssignForm = ({ closeModal, selectedId }) => {
         return () => clearTimeout(timer)
     }, [locationData, location.pathname])
     useEffect(() => {
-        if (!availableWorker?.data?.workers) return
+        if (!availableWorker?.data?.workers || !availableWorker?.data?.jobLocation?.coordinates) return;
+
         const coordinates = availableWorker?.data?.workers?.map(item => ({
             longitude: item?.location?.coordinates?.[0],
             latitude: item?.location?.coordinates?.[1],
-            popup: 'You are here',
+            popup: `${item?.name} are here`,
             icon: customIcon
-        }))
-        setLocation(coordinates)
-    }, [availableWorker?.data?.workers])
+        }));
+
+        coordinates.unshift({
+            longitude: availableWorker?.data?.jobLocation?.coordinates?.[0],
+            latitude: availableWorker?.data?.jobLocation?.coordinates?.[1],
+            popup: 'Client Is Here',
+            icon: clientIcon
+        });
+
+        setLocation(coordinates);
+    }, [availableWorker?.data?.workers, availableWorker?.data?.jobLocation?.coordinates]);
+    console.log(availableWorker?.data?.workers)
     return (
         <div className='p-4 pt-10'>
             {

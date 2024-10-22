@@ -6,6 +6,7 @@ import moment from "moment"
 import { useCompleatWorkMutation } from "../../Redux/Apis/workerApis"
 import { FaInfoCircle } from "react-icons/fa"
 import toast from "react-hot-toast"
+import { imageUrl } from "../../Redux/BaseUrl"
 
 
 const WorkerActivitiesTable = ({ data, pagination }) => {
@@ -30,7 +31,6 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
             toast.error(err?.data?.message)
         })
     }
-    console.log(selectedData)
     const columns = [
         {
             title: 'Name',
@@ -91,11 +91,11 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
                     <div className="grid-2 w-full h-[350px] overflow-hidden">
                         <div className="h-[350px] ">
                             <p className="font-bold">Before image</p>
-                            <img className="object-contain w-full h-full border" src={selectedData?.carImageBefore} alt="" />
+                            <img className="object-contain w-full h-full border" src={imageUrl(selectedData?.carImageBefore)} alt="" />
                         </div>
                         <div className="h-[350px] ">
                             <p className="font-bold">After image</p>
-                            <img className="object-contain w-full h-full border" src={selectedData?.carImageAfter} alt="" />
+                            <img className="object-contain w-full h-full border" src={imageUrl(selectedData?.carImageAfter)} alt="" />
                         </div>
                     </div>
                     <div className='center-center col-span-2 gap-2'>
@@ -115,7 +115,7 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
                             type='submit'
                             className='button-orange w-full'
                         >
-                            Compleat
+                            Complete
                         </button>
                     </div>
                 </div>

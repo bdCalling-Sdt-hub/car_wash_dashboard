@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const Map = ({ locationData, height = 300, center = [23.7815, 90.4002] }) => { // Fallback center to a known location
+    // console.log(center,locationData)
     return (
         <div style={{ height: `${height}px`, width: '100%' }}>
             <MapContainer

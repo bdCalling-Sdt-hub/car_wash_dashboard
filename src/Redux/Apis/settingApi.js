@@ -3,16 +3,29 @@ import { baseApi } from "../BaseUrl";
 const settingApi = baseApi.injectEndpoints({
     // add Privacy  terms privacy
     endpoints: (build) => ({
-        addAboutTermsPrivacy: build.mutation({
+        addTerms: build.mutation({
             query: (data) => ({
-                url: 'settings/update-settings',
+                url: 'dashboard/add-terms-conditions',
                 method: 'POST',
                 body: data
             })
         }),
-        getAboutTermsPrivacy: build.query({
-            query: (type) => ({
-                url: `settings/get-settings/${type}`,
+        getTerms: build.query({
+            query: () => ({
+                url: `dashboard/get-terms-conditions`,
+                method: 'GET'
+            })
+        }),
+        addPrivacy: build.mutation({
+            query: (data) => ({
+                url: 'dashboard/add-privacy-policy',
+                method: 'POST',
+                body: data
+            })
+        }),
+        getPrivacy: build.query({
+            query: () => ({
+                url: `dashboard/get-privacy-policy`,
                 method: 'GET'
             })
         })
@@ -20,7 +33,9 @@ const settingApi = baseApi.injectEndpoints({
 })
 export const {
     // add about
-    useAddAboutTermsPrivacyMutation,
+    useAddTermsMutation,
     // get about
-    useGetAboutTermsPrivacyQuery
+    useGetTermsQuery,
+    useAddPrivacyMutation,
+    useGetPrivacyQuery
 } = settingApi

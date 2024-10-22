@@ -9,6 +9,7 @@ import { useFetchSingleJobQuery } from "../../Redux/Apis/workerApis";
 import Loading from "../../Components/Shared/Loading";
 import moment from "moment";
 import { TbLocationOff } from "react-icons/tb";
+import { imageUrl } from "../../Redux/BaseUrl";
 const customIcon = new L.Icon({
     iconUrl: markerIcon,
     iconSize: [25, 41],
@@ -74,7 +75,7 @@ const Track = () => {
                     <p>Client</p>
                     <div className="p-3 border border-gray-300">
                         <div className="start-center gap-2">
-                            <img src={data?.data?.client?.profile_image || "https://i.ibb.co.com/MPtkVmj/istockphoto-1327592506-612x612-2.jpg"} className='h-10 w-10 object-cover rounded-full' alt="" />
+                            <img src={imageUrl(data?.data?.client?.profile_image) || "https://i.ibb.co.com/MPtkVmj/istockphoto-1327592506-612x612-2.jpg"} className='h-10 w-10 object-cover rounded-full' alt="" />
                             <div>
                                 <p className="font-semibold">{data?.data?.client?.name}</p>
                                 <p className="text-sm">{data?.data?.client?.email}</p>
@@ -92,7 +93,7 @@ const Track = () => {
                     <p>Driver</p>
                     <div className="p-3 border border-gray-300">
                         <div className="start-center gap-2">
-                            <img src={data?.data?.job?.assignedWorker?.profile_image || "https://i.ibb.co.com/MPtkVmj/istockphoto-1327592506-612x612-2.jpg"} className='h-10 w-10 object-cover rounded-full' alt="" />
+                            <img src={imageUrl(data?.data?.job?.assignedWorker?.profile_image) || "https://i.ibb.co.com/MPtkVmj/istockphoto-1327592506-612x612-2.jpg"} className='h-10 w-10 object-cover rounded-full' alt="" />
                             <div>
                                 <p className="font-semibold">{data?.data?.job?.assignedWorker?.name}</p>
                                 <p className="text-sm">{data?.data?.job?.assignedWorker?.email}</p>
