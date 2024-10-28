@@ -22,11 +22,10 @@ const WorkerActivitiesTable = ({ data, pagination }) => {
             "status": "COMPLETED"
         }
         completeWork(data).unwrap().then((res) => {
-            console.log(res)
+            setOpenModal(false)
             toast.dismiss()
             toast.success(res?.message)
         }).catch((err) => {
-            console.log(err)
             toast.dismiss()
             toast.error(err?.data?.message)
         })

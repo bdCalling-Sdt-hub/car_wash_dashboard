@@ -19,6 +19,7 @@ import Track from "../Pages/Dashboard/Track";
 import TotalRequest from "../Pages/Dashboard/TotalRequest";
 import EndedWork from "../Pages/Dashboard/EndedWork";
 import AdminRoutes from "../PrivetRoutes/AdminRoutes";
+import WorkHour from "../Pages/Dashboard/WorkHour";
 
 export const Routes = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ export const Routes = createBrowserRouter([
             {
                 path: '/track',
                 element: <Track />
+            },
+            {
+                path: '/work-hour',
+                element: <WorkHour />
             },
             {
                 path: '*',

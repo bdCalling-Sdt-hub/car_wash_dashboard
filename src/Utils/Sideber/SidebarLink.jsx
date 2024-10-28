@@ -52,10 +52,6 @@ export const SettingLinks = [
         path: '/profile',
         label: 'Profile',
     },
-    // {
-    //     path: '/faq',
-    //     label: 'FAQ',
-    // },
     {
         path: '/privacy-policy',
         label: 'Privacy Policy',
@@ -63,5 +59,9 @@ export const SettingLinks = [
     {
         path: '/terms-&-condition',
         label: 'Terms & Condition',
+    },
+    {
+        path: '/work-hour',
+        label: 'Work Hour',
     },
 ]

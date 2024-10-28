@@ -28,6 +28,19 @@ const settingApi = baseApi.injectEndpoints({
                 url: `dashboard/get-privacy-policy`,
                 method: 'GET'
             })
+        }),
+        getWorkHour: build.query({
+            query: () => ({
+                url: `dashboard/get-variable`,
+                method: 'GET'
+            })
+        }),
+        updateWorkHour: build.mutation({
+            query: (data) => ({
+                url: `dashboard/update-variable`,
+                method: 'PATCH',
+                body: data
+            })
         })
     })
 })
@@ -37,5 +50,7 @@ export const {
     // get about
     useGetTermsQuery,
     useAddPrivacyMutation,
-    useGetPrivacyQuery
+    useGetPrivacyQuery,
+    useGetWorkHourQuery,
+    useUpdateWorkHourMutation
 } = settingApi

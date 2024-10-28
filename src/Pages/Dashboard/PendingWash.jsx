@@ -5,7 +5,7 @@ import { useFetchWorkersQuery } from "../../Redux/Apis/workerApis"
 
 const PendingWash = () => {
     const [page, setPage] = useState()
-    const { data: workers } = useFetchWorkersQuery({ status: 'ENDED', page })
+    const { data: workers } = useFetchWorkersQuery({ status: 'PENDING', page })
     return (
         <>
             <div className="mb-3">
